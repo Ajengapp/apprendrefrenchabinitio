@@ -5,396 +5,1102 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Français+ | Mon espace pour apprendre le français</title>
+<meta name="description" content="Un espace interactif pour apprendre le français A1 et A2.">
 <style>
 :root {
-  --purple: #A68BE0;
-  --pink: #F6A5C7;
-  --yellow: #FFD782;
-  --cream: #FFF8F3;
-  --dark: #55436D;
-  --white: #FFFFFF;
+  --lavender:#A68BE0;
+  --pink:#F6A5C7;
+  --yellow:#FFD782;
+  --cream:#FFF8F3;
+  --purple:#55436D;
+  --dark:#382C49;
+  --white:#FFFFFF;
+  --muted:#81758C;
+  --border:#EEE5F0;
+  --shadow:0 5px 22px rgba(85,67,109,.08);
 }
-* { box-sizing: border-box; }
+* {box-sizing:border-box;margin:0;padding:0}
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--cream);
-  color: var(--dark);
+  font-family:Arial,Helvetica,sans-serif;
+  background:#FCFAFD;
+  color:var(--dark);
+  line-height:1.65;
 }
+button,input,textarea,select {font:inherit}
+button {cursor:pointer}
+a {color:inherit;text-decoration:none}
 header {
-  background: white;
-  padding: 18px 7%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  box-shadow: 0 2px 12px #55436d12;
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  background:rgba(255,248,243,.96);
+  position:sticky;top:0;z-index:50;
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);
 }
-.logo { font-size: 25px; font-weight: bold; color: var(--dark); }
-.logo span { color: var(--purple); }
-nav { display: flex; gap: 18px; flex-wrap: wrap; }
-nav a {
-  text-decoration: none;
-  color: var(--dark);
-  font-size: 14px;
-  font-weight: bold;
+.header-inner {
+  max-width:1200px;margin:auto;padding:13px 22px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:15px;
 }
-nav a:hover { color: #A68BE0; }
+.logo {font-size:25px;font-weight:900;color:var(--purple)}
+.logo span {color:var(--pink)}
+.logo small {display:block;font-size:10px;letter-spacing:2px;font-weight:600}
+nav {display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+nav button {
+  border:0;background:transparent;color:var(--purple);
+  padding:9px 11px;border-radius:10px;font-size:12px;font-weight:700;
+}
+nav button:hover,nav button.active {background:#EFE8F9}
+.menu-toggle {display:none}
+main {max-width:1150px;margin:auto;padding:28px 22px 60px}
+.page {display:none;animation:appear .25s ease}
+.page.active {display:block}
+@keyframes appear {from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .hero {
-  padding: 75px 7%;
-  background: linear-gradient(120deg,#F6A5C7,#D9C9F5,#FFD782);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 35px;
-  flex-wrap: wrap;
+  background:linear-gradient(120deg,#F2EAFB,#FFF0F5,#FFF8E9);
+  border-radius:25px;padding:48px 40px;
+  display:grid;grid-template-columns:1.4fr .8fr;
+  align-items:center;gap:20px;overflow:hidden;
 }
-.hero-text { max-width: 570px; }
-.hero h1 { font-size: clamp(36px,5vw,58px); margin: 10px 0; }
-.hero p { font-size: 18px; line-height: 1.7; }
-.hero-art { font-size: 105px; }
+.eyebrow {
+  color:#9575C9;font-size:12px;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;
+}
+h1 {font-size:clamp(32px,5vw,51px);line-height:1.12;color:var(--purple);margin:13px 0}
+.hero p {max-width:540px;color:#75677E;font-size:16px}
+.hero-art {font-size:100px;text-align:center;line-height:1.3}
 .btn {
-  display: inline-block;
-  background: var(--dark);
-  color: white;
-  padding: 14px 25px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
+  border:0;border-radius:11px;padding:11px 18px;
+  font-weight:700;display:inline-block;
+  background:var(--purple);color:white;
 }
-.btn:hover { opacity: .85; }
-section { padding: 65px 7%; }
-.section-title { text-align: center; margin-bottom: 35px; }
-.section-title h2 { font-size: 32px; }
-.section-title p { color: #81738e; }
-.levels {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 35px;
-  flex-wrap: wrap;
-}
-.level-btn {
-  border: 2px solid var(--purple);
-  background: white;
-  color: var(--dark);
-  padding: 12px 30px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-}
-.level-btn.active { background: var(--purple); color: white; }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-  gap: 22px;
-}
+.btn:hover {opacity:.88;transform:translateY(-1px)}
+.btn-pink {background:var(--pink);color:var(--purple)}
+.btn-purple {background:var(--lavender);color:white}
+.btn-yellow {background:var(--yellow);color:var(--purple)}
+.btn-light {background:#F0EAF7;color:var(--purple)}
+.hero .btn {margin-top:22px}
+.section-title {margin:34px 0 17px}
+.section-title h2 {font-size:25px;color:var(--purple)}
+.section-title p {font-size:13px;color:var(--muted)}
+.grid {display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.grid.two {grid-template-columns:repeat(2,1fr)}
+.grid.four {grid-template-columns:repeat(4,1fr)}
 .card {
-  background: white;
-  padding: 28px;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px #55436d12;
-  transition: .2s;
+  background:white;border:1px solid var(--border);
+  padding:21px;border-radius:17px;box-shadow:var(--shadow);
 }
-.card:hover { transform: translateY(-5px); }
-.card .emoji { font-size: 42px; }
-.card h3 { font-size: 21px; }
-.card p { line-height: 1.6; color: #81738e; }
-.card a {
-  color: var(--dark);
-  font-weight: bold;
-  text-decoration: none;
+.card h3 {color:var(--purple);font-size:17px;margin:7px 0}
+.card p {font-size:13px;color:#776C80}
+.card-icon {font-size:30px}
+.card-link {display:inline-block;margin-top:14px;font-size:12px;font-weight:800;color:#9676CB}
+.card-link:hover {text-decoration:underline}
+.feature-card {border-top:5px solid var(--lavender)}
+.feature-card.pink {border-top-color:var(--pink)}
+.feature-card.yellow {border-top-color:var(--yellow)}
+.feature-card.purple {border-top-color:var(--purple)}
+.tag {
+  display:inline-block;background:#F1EAF9;color:#765D9B;
+  border-radius:30px;padding:4px 10px;font-size:11px;font-weight:700;
 }
-.purple { border-top: 6px solid var(--purple); }
-.pink { border-top: 6px solid var(--pink); }
-.yellow { border-top: 6px solid var(--yellow); }
-.dark { border-top: 6px solid var(--dark); }
-.activity {
-  background: #F0E9FA;
-  border-radius: 25px;
-  padding: 35px;
-  max-width: 750px;
-  margin: auto;
+.tag-pink {background:#FFF0F5;color:#B66C91}
+.tag-yellow {background:#FFF7E3;color:#9A7834}
+.page-heading {margin-bottom:25px}
+.page-heading h1 {font-size:34px;margin:7px 0}
+.page-heading p {color:var(--muted)}
+.tabs {display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
+.tab {
+  border:1px solid var(--border);border-radius:30px;
+  padding:9px 15px;background:white;color:var(--purple);
+  font-size:12px;font-weight:700;
 }
-.activity button {
-  margin: 8px 5px;
-  padding: 12px 20px;
-  border: 1px solid var(--purple);
-  background: white;
-  border-radius: 15px;
-  cursor: pointer;
+.tab.active {background:var(--purple);color:white}
+.content-panel {display:none}
+.content-panel.active {display:block}
+.lesson {margin-bottom:18px}
+.lesson h2 {font-size:22px;color:var(--purple);margin-bottom:12px}
+.lesson h3 {font-size:16px;color:#8567B2;margin:20px 0 8px}
+.lesson p,.lesson li {font-size:14px;color:#645B6D}
+.lesson ul {padding-left:22px;margin:8px 0}
+.example {
+  background:#F6F0FC;border-left:4px solid var(--lavender);
+  padding:13px 16px;border-radius:8px;margin:12px 0;
+  font-size:14px;
 }
-.activity button:hover { background: var(--purple); color: white; }
-#result { font-weight: bold; margin-top: 15px; }
-.assistant {
-  background: #55436D;
-  color: white;
-  border-radius: 25px;
-  padding: 35px;
-  max-width: 750px;
-  margin: auto;
+.note {
+  background:#FFF5DF;border-left:4px solid var(--yellow);
+  padding:13px 16px;border-radius:8px;margin:12px 0;font-size:13px;
 }
-.assistant input {
-  width: 100%;
-  padding: 14px;
-  border-radius: 12px;
-  border: none;
-  margin: 15px 0;
+.word-table {width:100%;border-collapse:collapse;font-size:13px;margin:14px 0}
+.word-table th {background:#F0EAF7;color:var(--purple);text-align:left}
+.word-table th,.word-table td {padding:11px;border-bottom:1px solid var(--border)}
+.activity {margin-bottom:16px}
+.activity h3 {color:var(--purple);margin-bottom:8px}
+.activity p {font-size:14px;margin-bottom:10px}
+.activity input[type=text],.activity textarea,
+.form-control {
+  width:100%;padding:11px;border:1px solid #E5DAEC;
+  border-radius:9px;background:white;margin:5px 0 12px;
 }
-.assistant button {
-  padding: 12px 22px;
-  border: none;
-  border-radius: 20px;
-  background: var(--yellow);
-  color: var(--dark);
-  cursor: pointer;
-  font-weight: bold;
+textarea {min-height:100px;resize:vertical}
+select.form-control {cursor:pointer}
+.question {padding:16px;background:white;border:1px solid var(--border);border-radius:12px;margin:12px 0}
+.question p {font-weight:700;font-size:14px;margin-bottom:10px}
+.question label {display:block;font-size:13px;padding:5px;cursor:pointer}
+.feedback {margin-top:12px;padding:12px;border-radius:9px;font-size:13px}
+.correct {background:#E6F5EA;color:#28623A}
+.incorrect {background:#FFF0F0;color:#9B3F45}
+.score-box {
+  background:#F2ECFA;padding:20px;border-radius:15px;
+  text-align:center;margin:15px 0;display:none
 }
-#answer { margin-top: 18px; line-height: 1.6; }
-footer {
-  background: var(--dark);
-  color: white;
-  text-align: center;
-  padding: 30px;
+.score-number {font-size:35px;color:var(--purple);font-weight:900}
+.culture-banner {
+  background:linear-gradient(120deg,#FFF0F5,#F3EDFC);
+  padding:25px;border-radius:17px;margin-bottom:17px;
 }
-@media(max-width:650px) {
-  header { justify-content: center; }
-  nav { justify-content: center; }
-  .hero { text-align: center; justify-content: center; }
-  .hero-art { font-size: 75px; }
+.culture-banner h2 {color:var(--purple);font-size:23px}
+.task {
+  background:white;border:1px solid var(--border);
+  border-radius:13px;padding:16px;margin:12px 0;
+}
+.task-header {display:flex;justify-content:space-between;gap:10px;align-items:center}
+.task p {font-size:13px;color:#71667B;margin:8px 0}
+.status {font-size:11px;font-weight:800;color:#9773C5}
+.progress {height:9px;background:#EFE9F5;border-radius:10px;overflow:hidden;margin:10px 0}
+.progress div {height:100%;background:var(--lavender);width:0;transition:.3s}
+.stat {background:white;border:1px solid var(--border);border-radius:14px;padding:18px;text-align:center}
+.stat strong {display:block;font-size:27px;color:var(--purple)}
+.stat span {font-size:12px;color:var(--muted)}
+.chat {
+  border:1px solid var(--border);border-radius:15px;
+  background:white;overflow:hidden;
+}
+.chat-head {background:var(--purple);color:white;padding:15px;font-weight:700}
+.chat-messages {padding:17px;height:300px;overflow-y:auto;background:#FFFCFE}
+.message {padding:11px 13px;border-radius:13px;margin:9px 0;max-width:85%;font-size:13px}
+.bot {background:#F0EAF7;color:var(--purple)}
+.user {background:#FFEAF2;color:#75475F;margin-left:auto}
+.chat-input {display:flex;padding:12px;gap:8px;border-top:1px solid var(--border)}
+.chat-input input {flex:1;min-width:0;border:1px solid var(--border);padding:11px;border-radius:9px}
+footer {background:var(--purple);color:white;text-align:center;padding:28px 15px}
+footer p {font-size:12px;opacity:.8}
+.empty {text-align:center;padding:25px;color:var(--muted);font-size:13px}
+.small {font-size:11px;color:var(--muted)}
+hr {border:0;border-top:1px solid var(--border);margin:20px 0}
+@media(max-width:800px) {
+  .grid.four {grid-template-columns:repeat(2,1fr)}
+  .grid {grid-template-columns:repeat(2,1fr)}
+  .hero {grid-template-columns:1fr;padding:30px 23px}
+  .hero-art {font-size:65px}
+}
+@media(max-width:600px) {
+  .header-inner {flex-wrap:wrap}
+  .menu-toggle {display:block;background:#F0EAF7;border:0;padding:8px 12px;border-radius:8px;color:var(--purple)}
+  nav {display:none;width:100%;flex-direction:column;align-items:stretch}
+  nav.open {display:flex}
+  nav button {text-align:left}
+  main {padding:20px 14px 40px}
+  .grid,.grid.two,.grid.four {grid-template-columns:1fr}
+  .hero {padding:27px 20px}
+  .page-heading h1 {font-size:28px}
+  .hero-art {font-size:55px}
+  .task-header {align-items:flex-start;flex-direction:column}
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Français<span>+</span> ✨</div>
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#apprends">J'apprends</a>
-    <a href="#decouvre">Je découvre</a>
-    <a href="#pratique">Je pratique</a>
-    <a href="#evalue">Je m'évalue</a>
-    <a href="#assistant">Assistant IA</a>
-  </nav>
+  <div class="header-inner">
+    <a class="logo" href="#" onclick="showPage('accueil');return false">
+      Français<span>+</span>
+      <small>MON ESPACE POUR APPRENDRE</small>
+    </a>
+    <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
+    <nav id="navigation">
+      <button class="active" onclick="showPage('accueil',this)">Accueil</button>
+      <button onclick="showPage('apprends',this)">J'apprends</button>
+      <button onclick="showPage('decouvre',this)">Je découvre</button>
+      <button onclick="showPage('pratique',this)">Je pratique</button>
+      <button onclick="showPage('evalue',this)">Je m'évalue</button>
+      <button onclick="showPage('devoirs',this)">Mes devoirs</button>
+      <button onclick="showPage('espace',this)">Mon espace</button>
+      <button onclick="showPage('assistant',this)">Assistant IA</button>
+    </nav>
+  </div>
 </header>
 
-<div class="hero" id="accueil">
-  <div class="hero-text">
-    <p>🇫🇷 BIENVENUE DANS TON ESPACE FLE</p>
-    <h1>Apprendre le français devient un plaisir !</h1>
-    <p>
-      Découvre, apprends et pratique le français à ton rythme.
-      Des activités amusantes pour progresser chaque jour !
-    </p>
-    <a class="btn" href="#apprends">Je commence ! →</a>
-  </div>
-  <div class="hero-art">📚 🌸 🇫🇷</div>
-</div>
+<main>
 
-<section id="apprends">
+<!-- ACCUEIL -->
+<section id="accueil" class="page active">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Bienvenue dans ton espace de français !</div>
+      <h1>Bonjour !<br>Prêt à apprendre le français ?</h1>
+      <p>Découvre, apprends et pratique le français à ton rythme. Des cours, des activités, des jeux et des défis t'attendent !</p>
+      <button class="btn" onclick="showPage('apprends')">Commencer à apprendre →</button>
+    </div>
+    <div class="hero-art">📚 🇫🇷 ✨</div>
+  </div>
+
   <div class="section-title">
-    <h2>📖 J'APPRENDS</h2>
-    <p>Je découvre les bases de la langue française.</p>
+    <h2>Explore ton espace</h2>
+    <p>Choisis une rubrique pour commencer ton apprentissage.</p>
   </div>
-  <div class="levels">
-    <button class="level-btn active" onclick="filterLevel('A1',this)">Niveau A1</button>
-    <button class="level-btn" onclick="filterLevel('A2',this)">Niveau A2</button>
-    <button class="level-btn" onclick="filterLevel('Tous',this)">Tous les niveaux</button>
+  <div class="grid four">
+    <div class="card feature-card">
+      <div class="card-icon">📖</div>
+      <h3>J'apprends</h3>
+      <p>Grammaire, conjugaison, vocabulaire et expressions.</p>
+      <a class="card-link" href="#" onclick="showPage('apprends');return false">Voir les cours →</a>
+    </div>
+    <div class="card feature-card pink">
+      <div class="card-icon">🌍</div>
+      <h3>Je découvre</h3>
+      <p>La France, la culture et le monde francophone.</p>
+      <a class="card-link" href="#" onclick="showPage('decouvre');return false">Découvrir →</a>
+    </div>
+    <div class="card feature-card yellow">
+      <div class="card-icon">✏️</div>
+      <h3>Je pratique</h3>
+      <p>Les quatre compétences et des jeux de français.</p>
+      <a class="card-link" href="#" onclick="showPage('pratique');return false">S'entraîner →</a>
+    </div>
+    <div class="card feature-card purple">
+      <div class="card-icon">⭐</div>
+      <h3>Je m'évalue</h3>
+      <p>Des quiz pour vérifier tes connaissances.</p>
+      <a class="card-link" href="#" onclick="showPage('evalue');return false">Faire un quiz →</a>
+    </div>
   </div>
-  <div class="cards" id="lessonCards">
-    <div class="card purple" data-level="A1">
-      <div class="emoji">🔤</div>
-      <h3>Grammaire</h3>
-      <p>Les articles, les pronoms, les adjectifs et les phrases simples.</p>
-      <a href="#pratique">Découvrir →</a>
+
+  <div class="section-title"><h2>Ton parcours d'apprentissage</h2></div>
+  <div class="grid two">
+    <div class="card">
+      <h3>🎯 Objectif A1</h3>
+      <p>Se présenter, parler de sa famille, décrire son quotidien, exprimer ses goûts et communiquer dans des situations simples.</p>
     </div>
-    <div class="card pink" data-level="A1">
-      <div class="emoji">✍️</div>
-      <h3>Conjugaison</h3>
-      <p>Les verbes être, avoir, aller et les verbes en -ER.</p>
-      <a href="#pratique">Découvrir →</a>
+    <div class="card">
+      <h3>🚀 Objectif A2</h3>
+      <p>Raconter des expériences, décrire des événements, parler de ses projets et communiquer dans des situations courantes.</p>
     </div>
-    <div class="card yellow" data-level="A1">
-      <div class="emoji">📚</div>
-      <h3>Vocabulaire</h3>
-      <p>La famille, les loisirs, l'école et la vie quotidienne.</p>
-      <a href="#pratique">Découvrir →</a>
+  </div>
+  <div class="section-title"><h2>Une petite motivation ! 💜</h2></div>
+  <div class="culture-banner">
+    <h2>Chaque mot appris est un pas en avant.</h2>
+    <p>« Petit à petit, l'oiseau fait son nid. »</p>
+    <p class="small">Un proverbe français : la patience et la régularité permettent de progresser.</p>
+  </div>
+</section>
+
+<!-- J'APPRENDS -->
+<section id="apprends" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Les ressources pédagogiques</div>
+    <h1>📖 J'apprends</h1>
+    <p>Découvre les leçons et les bases de la langue française.</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="openTab('cours','grammaire',this)">Grammaire</button>
+    <button class="tab" onclick="openTab('cours','conjugaison',this)">Conjugaison</button>
+    <button class="tab" onclick="openTab('cours','vocabulaire',this)">Vocabulaire</button>
+    <button class="tab" onclick="openTab('cours','expressions',this)">Expressions</button>
+    <button class="tab" onclick="openTab('cours','fiches',this)">Fiches de cours</button>
+  </div>
+
+  <div id="grammaire" class="content-panel active">
+    <div class="card lesson">
+      <span class="tag">A1 · Grammaire</span>
+      <h2>Les articles définis et indéfinis</h2>
+      <p>En français, les noms sont généralement accompagnés d'un article.</p>
+      <h3>1. Les articles définis</h3>
+      <table class="word-table">
+        <tr><th>Article</th><th>Utilisation</th><th>Exemple</th></tr>
+        <tr><td>Le</td><td>Masculin singulier</td><td>Le livre</td></tr>
+        <tr><td>La</td><td>Féminin singulier</td><td>La maison</td></tr>
+        <tr><td>L'</td><td>Devant une voyelle ou un h muet</td><td>L'école</td></tr>
+        <tr><td>Les</td><td>Pluriel</td><td>Les élèves</td></tr>
+      </table>
+      <h3>2. Les articles indéfinis</h3>
+      <table class="word-table">
+        <tr><th>Article</th><th>Utilisation</th><th>Exemple</th></tr>
+        <tr><td>Un</td><td>Masculin singulier</td><td>Un garçon</td></tr>
+        <tr><td>Une</td><td>Féminin singulier</td><td>Une fille</td></tr>
+        <tr><td>Des</td><td>Pluriel</td><td>Des livres</td></tr>
+      </table>
+      <div class="example">Exemples : J'ai un frère. Le frère de Marie est gentil. Elle a une sœur. Les enfants sont à l'école.</div>
+      <div class="note">Astuce : apprends toujours le nom avec son article : une table, un stylo, une école.</div>
     </div>
-    <div class="card dark" data-level="A2">
-      <div class="emoji">💬</div>
-      <h3>Expressions françaises</h3>
-      <p>Exprimer ses opinions, ses goûts et ses expériences.</p>
-      <a href="#pratique">Découvrir →</a>
+    <div class="card lesson">
+      <span class="tag">A1 · Grammaire</span>
+      <h2>La négation : NE ... PAS</h2>
+      <p>Pour transformer une phrase affirmative en phrase négative, on utilise <b>ne ... pas</b>.</p>
+      <div class="example">
+        Je parle français. → Je ne parle pas français.<br>
+        Il aime le café. → Il n'aime pas le café.<br>
+        Nous sommes étudiants. → Nous ne sommes pas étudiants.
+      </div>
+      <h3>Structure</h3>
+      <p>Sujet + ne/n' + verbe + pas + complément.</p>
+      <div class="note">Devant une voyelle, « ne » devient « n' » : Je n'aime pas le thé.</div>
     </div>
-    <div class="card purple" data-level="A2">
-      <div class="emoji">⏳</div>
-      <h3>Les temps du passé</h3>
-      <p>Découvrir le passé composé et l'imparfait.</p>
-      <a href="#pratique">Découvrir →</a>
+    <div class="card lesson">
+      <span class="tag">A2 · Grammaire</span>
+      <h2>Les adjectifs qualificatifs</h2>
+      <p>L'adjectif donne une information sur un nom. Il s'accorde généralement en genre et en nombre.</p>
+      <table class="word-table">
+        <tr><th>Masculin</th><th>Féminin</th><th>Pluriel masculin</th><th>Pluriel féminin</th></tr>
+        <tr><td>Petit</td><td>Petite</td><td>Petits</td><td>Petites</td></tr>
+        <tr><td>Grand</td><td>Grande</td><td>Grands</td><td>Grandes</td></tr>
+        <tr><td>Sportif</td><td>Sportive</td><td>Sportifs</td><td>Sportives</td></tr>
+      </table>
+      <div class="example">Un garçon intelligent. Une fille intelligente. Des filles intelligentes.</div>
+    </div>
+  </div>
+
+  <div id="conjugaison" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Présent</span>
+      <h2>Les verbes ÊTRE et AVOIR</h2>
+      <p>Ces deux verbes sont indispensables pour se présenter et construire des phrases.</p>
+      <table class="word-table">
+        <tr><th>Pronom</th><th>ÊTRE</th><th>AVOIR</th></tr>
+        <tr><td>Je</td><td>suis</td><td>ai</td></tr>
+        <tr><td>Tu</td><td>es</td><td>as</td></tr>
+        <tr><td>Il / Elle</td><td>est</td><td>a</td></tr>
+        <tr><td>Nous</td><td>sommes</td><td>avons</td></tr>
+        <tr><td>Vous</td><td>êtes</td><td>avez</td></tr>
+        <tr><td>Ils / Elles</td><td>sont</td><td>ont</td></tr>
+      </table>
+      <div class="example">Je suis indonésien. J'ai quinze ans. Nous sommes élèves. Ils ont un examen.</div>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A1 · Présent</span>
+      <h2>Les verbes en -ER</h2>
+      <p>Exemple : PARLER. On enlève -ER et on ajoute les terminaisons.</p>
+      <table class="word-table">
+        <tr><th>Pronom</th><th>Terminaison</th><th>Parler</th></tr>
+        <tr><td>Je</td><td>-e</td><td>parle</td></tr>
+        <tr><td>Tu</td><td>-es</td><td>parles</td></tr>
+        <tr><td>Il / Elle</td><td>-e</td><td>parle</td></tr>
+        <tr><td>Nous</td><td>-ons</td><td>parlons</td></tr>
+        <tr><td>Vous</td><td>-ez</td><td>parlez</td></tr>
+        <tr><td>Ils / Elles</td><td>-ent</td><td>parlent</td></tr>
+      </table>
+      <div class="example">J'aime le français. Tu regardes un film. Nous écoutons de la musique.</div>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2 · Passé</span>
+      <h2>Le passé composé</h2>
+      <p>Le passé composé sert à raconter une action terminée dans le passé.</p>
+      <h3>Formation</h3>
+      <p>Sujet + auxiliaire ÊTRE ou AVOIR au présent + participe passé.</p>
+      <div class="example">
+        J'ai mangé une pizza.<br>
+        Elle a regardé un film.<br>
+        Nous sommes allés à Paris.
+      </div>
+      <div class="note">Avec l'auxiliaire être, le participe passé s'accorde généralement avec le sujet : Elle est allée. Ils sont partis.</div>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2 · Futur</span>
+      <h2>Le futur proche</h2>
+      <p>Le futur proche exprime une action qui va se passer bientôt.</p>
+      <div class="example">Sujet + ALLER au présent + infinitif.</div>
+      <div class="example">Je vais étudier. Elle va voyager. Nous allons regarder un film.</div>
+    </div>
+  </div>
+
+  <div id="vocabulaire" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Vocabulaire</span>
+      <h2>La famille</h2>
+      <table class="word-table">
+        <tr><th>Français</th><th>Français</th></tr>
+        <tr><td>Le père</td><td>La mère</td></tr>
+        <tr><td>Le frère</td><td>La sœur</td></tr>
+        <tr><td>Le grand-père</td><td>La grand-mère</td></tr>
+        <tr><td>L'oncle</td><td>La tante</td></tr>
+        <tr><td>Le cousin</td><td>La cousine</td></tr>
+        <tr><td>Le fils</td><td>La fille</td></tr>
+      </table>
+      <h3>Exemple</h3>
+      <div class="example">Dans ma famille, il y a quatre personnes : mon père, ma mère, mon frère et moi.</div>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A1 · Vocabulaire</span>
+      <h2>Les loisirs</h2>
+      <table class="word-table">
+        <tr><th>Expression</th><th>Expression</th></tr>
+        <tr><td>Écouter de la musique</td><td>Regarder des films</td></tr>
+        <tr><td>Jouer au football</td><td>Lire des livres</td></tr>
+        <tr><td>Faire du vélo</td><td>Danser</td></tr>
+        <tr><td>Prendre des photos</td><td>Voyager</td></tr>
+        <tr><td>Cuisiner</td><td>Dessiner</td></tr>
+      </table>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2 · Vocabulaire</span>
+      <h2>Les voyages</h2>
+      <table class="word-table">
+        <tr><th>Mot</th><th>Mot</th></tr>
+        <tr><td>Une destination</td><td>Un billet</td></tr>
+        <tr><td>Une réservation</td><td>Un passeport</td></tr>
+        <tr><td>Un hébergement</td><td>Une valise</td></tr>
+        <tr><td>Un séjour</td><td>Un itinéraire</td></tr>
+        <tr><td>Visiter</td><td>Découvrir</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="expressions" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1</span>
+      <h2>Se présenter</h2>
+      <div class="example">
+        Bonjour ! Je m'appelle Sarah.<br>
+        J'ai seize ans.<br>
+        Je suis indonésienne.<br>
+        J'habite à Jakarta.<br>
+        J'aime la musique et le sport.
+      </div>
+      <h3>Questions utiles</h3>
+      <ul>
+        <li>Comment tu t'appelles ?</li>
+        <li>Quel âge as-tu ?</li>
+        <li>Où habites-tu ?</li>
+        <li>Qu'est-ce que tu aimes ?</li>
+        <li>Quels sont tes loisirs ?</li>
+      </ul>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A1–A2</span>
+      <h2>Au restaurant</h2>
+      <div class="example">
+        Serveur : Bonjour, vous désirez ?<br>
+        Client : Je voudrais un sandwich et un jus d'orange, s'il vous plaît.<br>
+        Serveur : Très bien. Autre chose ?<br>
+        Client : Non, merci. C'est combien ?<br>
+        Serveur : C'est dix euros.
+      </div>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2</span>
+      <h2>Donner son opinion</h2>
+      <ul>
+        <li>À mon avis...</li>
+        <li>Je pense que...</li>
+        <li>Je trouve que...</li>
+        <li>Je suis d'accord.</li>
+        <li>Je ne suis pas d'accord.</li>
+        <li>Parce que...</li>
+      </ul>
+      <div class="example">À mon avis, apprendre le français est intéressant parce que je peux découvrir une nouvelle culture.</div>
+    </div>
+  </div>
+
+  <div id="fiches" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">Fiches de révision</span>
+      <h2>Les bases du niveau A1</h2>
+      <ul>
+        <li>Les salutations et les présentations.</li>
+        <li>Les nombres, les dates et l'heure.</li>
+        <li>Les articles et les adjectifs.</li>
+        <li>Les verbes être, avoir et les verbes en -ER.</li>
+        <li>La famille, les loisirs et les goûts.</li>
+      </ul>
+      <h3>Les bases du niveau A2</h3>
+      <ul>
+        <li>Le passé composé et l'imparfait.</li>
+        <li>Le futur proche et le futur simple.</li>
+        <li>Les comparatifs et les expressions d'opinion.</li>
+        <li>Les voyages, les expériences et les projets.</li>
+      </ul>
+      <p class="note">Les fiches PDF pourront être ajoutées ici par l'enseignant en insérant leurs liens dans le code.</p>
     </div>
   </div>
 </section>
 
-<section id="decouvre" style="background:#F4EDF9">
-  <div class="section-title">
-    <h2>🌍 JE DÉCOUVRE</h2>
-    <p>Le français, c'est aussi une culture riche et passionnante !</p>
+<!-- JE DECOUVRE -->
+<section id="decouvre" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Culture et civilisation</div>
+    <h1>🌍 Je découvre</h1>
+    <p>Voyage à travers la France et le monde francophone !</p>
   </div>
-  <div class="cards">
-    <div class="card pink">
-      <div class="emoji">🥐</div>
-      <h3>Gastronomie</h3>
-      <p>Les spécialités françaises et les traditions culinaires.</p>
+  <div class="culture-banner">
+    <h2>Bienvenue dans le monde francophone !</h2>
+    <p>Le français est parlé dans de nombreux pays. Découvrons ensemble leurs traditions, leurs spécialités et leurs cultures.</p>
+  </div>
+  <div class="grid two">
+    <div class="card">
+      <div class="card-icon">🗼</div>
+      <span class="tag">La France</span>
+      <h3>Paris, la ville lumière</h3>
+      <p>Paris est la capitale de la France. On y trouve la tour Eiffel, le musée du Louvre, la cathédrale Notre-Dame et de nombreux cafés.</p>
+      <div class="example">Le monument célèbre de Paris est la tour Eiffel.</div>
     </div>
-    <div class="card purple">
-      <div class="emoji">🗼</div>
-      <h3>La France</h3>
-      <p>Les régions, les monuments et les villes françaises.</p>
+    <div class="card">
+      <div class="card-icon">🥐</div>
+      <span class="tag tag-pink">Gastronomie</span>
+      <h3>La cuisine française</h3>
+      <p>La France est célèbre pour ses pains, ses fromages et ses pâtisseries.</p>
+      <div class="example">Quelques spécialités : le croissant, la baguette, la crêpe et la ratatouille.</div>
     </div>
-    <div class="card yellow">
-      <div class="emoji">🎵</div>
-      <h3>Musique</h3>
-      <p>Découvrir les artistes et les chansons francophones.</p>
+    <div class="card">
+      <div class="card-icon">🎉</div>
+      <span class="tag tag-yellow">Traditions</span>
+      <h3>Le 14 juillet</h3>
+      <p>La fête nationale française est célébrée le 14 juillet. Il y a des défilés, des concerts et des feux d'artifice.</p>
     </div>
-    <div class="card dark">
-      <div class="emoji">🌎</div>
-      <h3>Francophonie</h3>
-      <p>Explorer les pays et les cultures francophones.</p>
+    <div class="card">
+      <div class="card-icon">🎄</div>
+      <span class="tag">Les fêtes</span>
+      <h3>La Chandeleur</h3>
+      <p>Le 2 février, beaucoup de familles françaises préparent et mangent des crêpes.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎵</div>
+      <span class="tag tag-pink">Musique</span>
+      <h3>La musique francophone</h3>
+      <p>La musique francophone est variée : pop, rap, chanson française et musique traditionnelle.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌎</div>
+      <span class="tag tag-yellow">Francophonie</span>
+      <h3>Le monde francophone</h3>
+      <p>Le français est présent en Belgique, en Suisse, au Canada, au Sénégal, au Cambodge et dans de nombreux autres pays.</p>
+    </div>
+  </div>
+  <div class="section-title"><h2>Le saviez-vous ? 💡</h2></div>
+  <div class="card">
+    <h3>Quelques faits intéressants</h3>
+    <ul style="padding-left:20px;font-size:14px">
+      <li>La baguette est un symbole de la gastronomie française.</li>
+      <li>Le Louvre est l'un des musées les plus connus du monde.</li>
+      <li>La francophonie rassemble des pays et des communautés qui utilisent le français.</li>
+      <li>Le français est une langue officielle dans plusieurs organisations internationales.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- JE PRATIQUE -->
+<section id="pratique" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Les activités</div>
+    <h1>✏️ Je pratique</h1>
+    <p>À toi de jouer ! Entraîne-toi avec les quatre compétences.</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="openTab('pratiques','co',this)">CO</button>
+    <button class="tab" onclick="openTab('pratiques','ce',this)">CE</button>
+    <button class="tab" onclick="openTab('pratiques','po',this)">PO</button>
+    <button class="tab" onclick="openTab('pratiques','pe',this)">PE</button>
+    <button class="tab" onclick="openTab('pratiques','jeux',this)">Jeux</button>
+  </div>
+  <div id="co" class="content-panel active">
+    <div class="card lesson">
+      <span class="tag">A1 · Compréhension orale</span>
+      <h2>Écoute et comprends ! 🎧</h2>
+      <p>Écoute le document audio, puis réponds aux questions.</p>
+      <p class="small">Document audio de démonstration :</p>
+      <audio controls style="width:100%;margin:10px 0">
+        <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/6/6f/Fr-Comment_tu_t%27appelles.ogg/Fr-Comment_tu_t%27appelles.ogg.mp3" type="audio/mpeg">
+        Votre navigateur ne supporte pas l'audio.
+      </audio>
+      <div class="note">Pour les enseignants : remplace ce fichier par un audio adapté à ta leçon si nécessaire.</div>
+      <div class="question">
+        <p>1. Quelle expression utilise-t-on pour demander le nom ?</p>
+        <label><input type="radio" name="co1" value="a"> Quel âge as-tu ?</label>
+        <label><input type="radio" name="co1" value="b"> Comment tu t'appelles ?</label>
+        <label><input type="radio" name="co1" value="c"> Où habites-tu ?</label>
+      </div>
+      <button class="btn btn-purple" onclick="checkSingle('co1','b','feedback-co')">Vérifier</button>
+      <div id="feedback-co"></div>
+    </div>
+  </div>
+
+  <div id="ce" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Compréhension écrite</span>
+      <h2>Lis le texte et réponds aux questions !</h2>
+      <div class="example">
+        <b>Bonjour ! Je m'appelle Lucas.</b><br>
+        J'ai seize ans et j'habite à Lyon, en France. Je suis lycéen. J'aime beaucoup le football et la musique. Le week-end, je joue au football avec mes amis. J'ai une sœur qui s'appelle Emma. Elle a quatorze ans. Nous aimons regarder des films ensemble.
+      </div>
+      <div class="question">
+        <p>1. Quel âge a Lucas ?</p>
+        <label><input type="radio" name="ce1" value="a"> Quatorze ans</label>
+        <label><input type="radio" name="ce1" value="b"> Seize ans</label>
+        <label><input type="radio" name="ce1" value="c"> Dix-huit ans</label>
+      </div>
+      <div class="question">
+        <p>2. Où habite Lucas ?</p>
+        <label><input type="radio" name="ce2" value="a"> À Paris</label>
+        <label><input type="radio" name="ce2" value="b"> À Marseille</label>
+        <label><input type="radio" name="ce2" value="c"> À Lyon</label>
+      </div>
+      <div class="question">
+        <p>3. Quel est son loisir ?</p>
+        <label><input type="radio" name="ce3" value="a"> Le football</label>
+        <label><input type="radio" name="ce3" value="b"> La cuisine</label>
+        <label><input type="radio" name="ce3" value="c"> La natation</label>
+      </div>
+      <button class="btn btn-purple" onclick="checkQuiz('ce',['b','c','a'],3)">Vérifier mes réponses</button>
+      <div id="score-ce" class="score-box"></div>
+    </div>
+  </div>
+
+  <div id="po" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Production orale</span>
+      <h2>Présente-toi ! 🎤</h2>
+      <p>Prépare une présentation orale de 30 à 60 secondes.</p>
+      <ul>
+        <li>Comment tu t'appelles ?</li>
+        <li>Quel âge as-tu ?</li>
+        <li>Où habites-tu ?</li>
+        <li>Quelle est ta nationalité ?</li>
+        <li>Qu'est-ce que tu aimes ?</li>
+        <li>Quels sont tes loisirs ?</li>
+      </ul>
+      <div class="note">Conseil : parle lentement, prononce clairement les mots et utilise des phrases complètes.</div>
+      <label><b>Écris tes idées pour préparer ta présentation :</b></label>
+      <textarea placeholder="Bonjour, je m'appelle..."></textarea>
+      <p class="small">Tu peux enregistrer ta voix avec ton téléphone, puis la présenter à ton professeur.</p>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2 · Production orale</span>
+      <h2>Parle de tes dernières vacances !</h2>
+      <p>Présente tes vacances en répondant aux questions :</p>
+      <ul>
+        <li>Où es-tu allé(e) ?</li>
+        <li>Avec qui es-tu parti(e) ?</li>
+        <li>Qu'est-ce que tu as fait ?</li>
+        <li>Qu'est-ce que tu as aimé ?</li>
+        <li>Comment était ton séjour ?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="pe" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Production écrite</span>
+      <h2>Écris un petit texte !</h2>
+      <p>Présente-toi en 5 à 7 phrases. Utilise les informations suivantes :</p>
+      <ul>
+        <li>Ton nom et ton âge.</li>
+        <li>Ta ville et ta nationalité.</li>
+        <li>Ta famille.</li>
+        <li>Tes loisirs et tes goûts.</li>
+      </ul>
+      <textarea placeholder="Bonjour ! Je m'appelle..."></textarea>
+      <p class="small">Vérifie les majuscules, les verbes et les articles avant de terminer.</p>
+    </div>
+    <div class="card lesson">
+      <span class="tag">A2 · Production écrite</span>
+      <h2>Écris un e-mail à ton ami(e) !</h2>
+      <p>Tu viens de passer un week-end intéressant. Raconte tes activités à ton ami(e) en 60 à 80 mots.</p>
+      <textarea placeholder="Salut ! Comment vas-tu ? Ce week-end..."></textarea>
+      <p class="small">Pense à utiliser le passé composé et les connecteurs : d'abord, ensuite, puis, enfin.</p>
+    </div>
+  </div>
+
+  <div id="jeux" class="content-panel">
+    <div class="card lesson">
+      <span class="tag">A1 · Jeu de vocabulaire</span>
+      <h2>Complète les phrases ! 🎮</h2>
+      <div class="activity">
+        <p>1. Je ______ seize ans.</p>
+        <input type="text" id="game1" placeholder="Ta réponse">
+        <p>2. J'______ un frère.</p>
+        <input type="text" id="game2" placeholder="Ta réponse">
+        <p>3. Nous ______ français.</p>
+        <input type="text" id="game3" placeholder="Ta réponse">
+      </div>
+      <button class="btn btn-purple" onclick="checkFill()">Vérifier</button>
+      <div id="fill-feedback"></div>
     </div>
   </div>
 </section>
 
-<section id="pratique">
-  <div class="section-title">
-    <h2>🎯 JE PRATIQUE</h2>
-    <p>Je développe mes quatre compétences en français.</p>
+<!-- JE M'EVALUE -->
+<section id="evalue" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Les évaluations</div>
+    <h1>⭐ Je m'évalue</h1>
+    <p>Teste tes connaissances et mesure tes progrès !</p>
   </div>
-  <div class="cards">
-    <div class="card purple">
-      <div class="emoji">🎧</div>
-      <h3>Compréhension orale</h3>
-      <p>J'écoute des dialogues et je réponds aux questions.</p>
+  <div class="card lesson">
+    <span class="tag">Quiz A1 · Grammaire et vocabulaire</span>
+    <h2>Quiz : Les bases du français</h2>
+    <p>Choisis une seule bonne réponse pour chaque question.</p>
+    <div id="main-quiz">
+      <div class="question">
+        <p>1. Je ______ étudiant.</p>
+        <label><input type="radio" name="q1" value="a"> suis</label>
+        <label><input type="radio" name="q1" value="b"> ai</label>
+        <label><input type="radio" name="q1" value="c"> es</label>
+      </div>
+      <div class="question">
+        <p>2. Elle ______ quinze ans.</p>
+        <label><input type="radio" name="q2" value="a"> est</label>
+        <label><input type="radio" name="q2" value="b"> a</label>
+        <label><input type="radio" name="q2" value="c"> as</label>
+      </div>
+      <div class="question">
+        <p>3. Quel est le féminin de « petit » ?</p>
+        <label><input type="radio" name="q3" value="a"> Petite</label>
+        <label><input type="radio" name="q3" value="b"> Petits</label>
+        <label><input type="radio" name="q3" value="c"> Petites</label>
+      </div>
+      <div class="question">
+        <p>4. Nous ______ français.</p>
+        <label><input type="radio" name="q4" value="a"> parle</label>
+        <label><input type="radio" name="q4" value="b"> parlez</label>
+        <label><input type="radio" name="q4" value="c"> parlons</label>
+      </div>
+      <div class="question">
+        <p>5. « La mère » signifie :</p>
+        <label><input type="radio" name="q5" value="a"> Mother</label>
+        <label><input type="radio" name="q5" value="b"> Sister</label>
+        <label><input type="radio" name="q5" value="c"> Grandmother</label>
+      </div>
     </div>
-    <div class="card pink">
-      <div class="emoji">📖</div>
-      <h3>Compréhension écrite</h3>
-      <p>Je lis des textes et je comprends les informations.</p>
-    </div>
-    <div class="card yellow">
-      <div class="emoji">🗣️</div>
-      <h3>Production orale</h3>
-      <p>Je parle de moi, de mes goûts et de mes expériences.</p>
-    </div>
-    <div class="card dark">
-      <div class="emoji">📝</div>
-      <h3>Production écrite</h3>
-      <p>J'écris des messages, des descriptions et des textes.</p>
+    <button class="btn" onclick="submitMainQuiz()">Terminer le quiz</button>
+    <button class="btn btn-light" onclick="resetMainQuiz()">Recommencer</button>
+    <div id="main-score" class="score-box"></div>
+  </div>
+  <div class="card lesson">
+    <span class="tag">Défi DELF</span>
+    <h2>Prépare-toi au DELF A1–A2</h2>
+    <p>Entraîne-toi avec les quatre épreuves :</p>
+    <div class="grid two">
+      <div class="card"><h3>🎧 Compréhension orale</h3><p>Comprendre des dialogues et des annonces simples.</p></div>
+      <div class="card"><h3>📄 Compréhension écrite</h3><p>Lire des messages, des textes et des annonces.</p></div>
+      <div class="card"><h3>🎤 Production orale</h3><p>Se présenter et interagir dans des situations simples.</p></div>
+      <div class="card"><h3>✍️ Production écrite</h3><p>Rédiger des messages et des textes courts.</p></div>
     </div>
   </div>
 </section>
 
-<section id="evalue" style="background:#F4EDF9">
-  <div class="section-title">
-    <h2>🏆 JE M'ÉVALUE</h2>
-    <p>Teste tes connaissances avec ce petit quiz !</p>
+<!-- MES DEVOIRS -->
+<section id="devoirs" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Le travail à la maison</div>
+    <h1>📝 Mes devoirs</h1>
+    <p>Retrouve tes tâches et organise ton travail.</p>
   </div>
-  <div class="activity">
-    <h3>Question 1 : Comment dit-on "Good morning" en français ?</h3>
-    <button onclick="checkAnswer(this,false)">Bonne nuit</button>
-    <button onclick="checkAnswer(this,true)">Bonjour</button>
-    <button onclick="checkAnswer(this,false)">Au revoir</button>
-    <div id="result"></div>
-    <button onclick="nextQuestion()" style="display:none" id="next">Question suivante →</button>
+  <div class="note">Les devoirs ci-dessous sont des exemples. L'enseignant peut modifier les consignes directement dans le code HTML.</div>
+  <div id="homework-list">
+    <div class="task">
+      <div class="task-header">
+        <h3>Devoir 1 – Se présenter</h3>
+        <span class="tag">A1 · Production écrite</span>
+      </div>
+      <p>Écris un paragraphe de 6 à 8 phrases pour te présenter. Parle de ton nom, ton âge, ta famille et tes loisirs.</p>
+      <p><b>Consigne :</b> Utilise les verbes être, avoir et les verbes en -ER.</p>
+      <p class="small">Échéance : à définir par l'enseignant.</p>
+      <label><input type="checkbox" onchange="markHomework(this,0)"> J'ai terminé ce devoir.</label>
+    </div>
+    <div class="task">
+      <div class="task-header">
+        <h3>Devoir 2 – Ma famille</h3>
+        <span class="tag tag-pink">A1 · Vocabulaire</span>
+      </div>
+      <p>Présente les membres de ta famille. Écris au moins 8 mots de vocabulaire et 5 phrases.</p>
+      <p><b>Consigne :</b> Utilise les adjectifs possessifs : mon, ma, mes, son, sa, ses.</p>
+      <label><input type="checkbox" onchange="markHomework(this,1)"> J'ai terminé ce devoir.</label>
+    </div>
+    <div class="task">
+      <div class="task-header">
+        <h3>Devoir 3 – Mes dernières vacances</h3>
+        <span class="tag tag-yellow">A2 · Production écrite</span>
+      </div>
+      <p>Rédige un texte de 80 à 100 mots sur tes dernières vacances.</p>
+      <p><b>Consigne :</b> Utilise le passé composé et les connecteurs chronologiques.</p>
+      <label><input type="checkbox" onchange="markHomework(this,2)"> J'ai terminé ce devoir.</label>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Ma progression dans les devoirs</h3>
+    <div class="progress"><div id="homework-progress"></div></div>
+    <p id="homework-count" class="small">0 devoir terminé sur 3.</p>
   </div>
 </section>
 
-<section id="assistant">
-  <div class="section-title">
-    <h2>🤖 MON ASSISTANT FRANÇAIS+</h2>
-    <p>Tu as une question ? Je suis là pour t'aider !</p>
+<!-- MON ESPACE -->
+<section id="espace" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Mon suivi personnel</div>
+    <h1>🌟 Mon espace</h1>
+    <p>Observe tes progrès et continue à apprendre !</p>
   </div>
-  <div class="assistant">
-    <h3>Bonjour ! Comment puis-je t'aider ? 🌸</h3>
-    <p>Écris une question sur le français :</p>
-    <input id="question" type="text" placeholder="Exemple : Quelle est la différence entre être et avoir ?">
-    <button onclick="askAssistant()">Envoyer ma question</button>
-    <div id="answer"></div>
-    <p style="font-size:12px;opacity:.7">Assistant de démonstration : ses réponses sont prédéfinies et ne constituent pas encore une véritable IA.</p>
+  <div class="card">
+    <h3>Bienvenue dans ton espace d'apprentissage !</h3>
+    <label for="student-name">Ton prénom :</label>
+    <input id="student-name" class="form-control" placeholder="Écris ton prénom" onchange="saveName()">
+    <p id="welcome-name" class="small">Ton parcours commence ici.</p>
+  </div>
+  <div class="section-title"><h2>Mes statistiques</h2></div>
+  <div class="grid four">
+    <div class="stat"><strong id="stat-quizzes">0</strong><span>Quiz terminés</span></div>
+    <div class="stat"><strong id="stat-score">0%</strong><span>Meilleur score</span></div>
+    <div class="stat"><strong id="stat-homework">0/3</strong><span>Devoirs terminés</span></div>
+    <div class="stat"><strong id="stat-points">0</strong><span>Points obtenus</span></div>
+  </div>
+  <div class="section-title"><h2>Mes résultats</h2></div>
+  <div class="card">
+    <h3>Historique des quiz</h3>
+    <div id="history"><p class="empty">Tu n'as pas encore terminé de quiz.</p></div>
+  </div>
+  <div class="section-title"><h2>Mon objectif</h2></div>
+  <div class="card">
+    <p>Je souhaite progresser en français chaque semaine ! 💜</p>
+    <div class="progress"><div id="learning-progress"></div></div>
+    <p class="small" id="progress-text">Continue tes activités pour avancer.</p>
   </div>
 </section>
+
+<!-- ASSISTANT -->
+<section id="assistant" class="page">
+  <div class="page-heading">
+    <div class="eyebrow">Ton compagnon d'apprentissage</div>
+    <h1>🤖 Mon assistant IA</h1>
+    <p>Pose tes questions sur le français et découvre de nouvelles explications.</p>
+  </div>
+  <div class="card lesson">
+    <span class="tag">Assistant pédagogique</span>
+    <h2>Bonjour ! Comment puis-je t'aider ?</h2>
+    <p>Tu peux demander une explication, un exemple ou un exercice de français.</p>
+    <div class="chat" style="margin-top:15px">
+      <div class="chat-head">💜 Assistant Français+</div>
+      <div class="chat-messages" id="chat-messages">
+        <div class="message bot">Bonjour ! 👋 Je suis ton assistant pédagogique. Je peux t'aider à comprendre la grammaire, la conjugaison et le vocabulaire français. Que veux-tu apprendre aujourd'hui ?</div>
+      </div>
+      <div class="chat-input">
+        <input id="chat-input" placeholder="Écris ta question..." onkeydown="if(event.key==='Enter')sendMessage()">
+        <button class="btn" onclick="sendMessage()">Envoyer</button>
+      </div>
+    </div>
+    <div class="section-title"><h3>Quelques idées de questions</h3></div>
+    <div class="tabs">
+      <button class="tab" onclick="quickAsk('Explique-moi le verbe être.')">Le verbe être</button>
+      <button class="tab" onclick="quickAsk('Quelle est la différence entre un et une ?')">Un ou une ?</button>
+      <button class="tab" onclick="quickAsk('Donne-moi un exercice sur les verbes en -ER.')">Exercice -ER</button>
+      <button class="tab" onclick="quickAsk('Comment former le passé composé ?')">Passé composé</button>
+    </div>
+    <div class="note">Version de démonstration : cet assistant utilise des réponses pédagogiques prédéfinies. Pour activer un véritable modèle d'intelligence artificielle, une connexion API sécurisée sera nécessaire.</div>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  <h2>Français+ ✨</h2>
-  <p>Mon espace pour apprendre le français.</p>
-  <p>Apprendre • Découvrir • Pratiquer • Progresser</p>
-  <small>© 2026 Français+ | Site pédagogique FLE</small>
+  <h2>Français<span style="color:#F6A5C7">+</span></h2>
+  <p>Mon espace pour apprendre le français</p>
+  <p style="margin-top:8px">Apprendre · Découvrir · Pratiquer · Progresser</p>
+  <p style="margin-top:15px">© 2026 Français+ | Créé pour les apprenants de FLE</p>
 </footer>
 
 <script>
-function filterLevel(level,button) {
-  document.querySelectorAll('.level-btn').forEach(b=>b.classList.remove('active'));
+/* NAVIGATION */
+function showPage(id,button) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  if(button) button.classList.add('active');
+  else {
+    const navButtons=[...document.querySelectorAll('nav button')];
+    const match=navButtons.find(b=>b.getAttribute('onclick')?.includes("'"+id+"'"));
+    if(match)match.classList.add('active');
+  }
+  document.getElementById('navigation').classList.remove('open');
+  if(id==='espace')updateDashboard();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleMenu() {
+  document.getElementById('navigation').classList.toggle('open');
+}
+function openTab(group,id,button) {
+  const section=button.closest('.page');
+  section.querySelectorAll('.content-panel').forEach(p=>p.classList.remove('active'));
+  section.querySelectorAll('.tabs .tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
   button.classList.add('active');
-  document.querySelectorAll('#lessonCards .card').forEach(card=>{
-    card.style.display = level==='Tous'||card.dataset.level===level?'block':'none';
+}
+
+/* STOCKAGE LOCAL */
+function getData() {
+  try {
+    return JSON.parse(localStorage.getItem('francaisPlus') || '{}');
+  } catch(e) {return {};}
+}
+function saveData(data) {
+  localStorage.setItem('francaisPlus',JSON.stringify(data));
+}
+
+/* QUIZ */
+function recordScore(name,score,total) {
+  let data=getData();
+  if(!data.history)data.history=[];
+  data.history.push({
+    name:name,
+    score:score,
+    total:total,
+    date:new Date().toLocaleDateString('fr-FR')
   });
+  saveData(data);
+  updateDashboard();
 }
-
-let answered = false;
-function checkAnswer(button,correct) {
-  if(answered) return;
-  answered=true;
-  document.getElementById('result').textContent = correct
-    ? '🎉 Bravo ! C’est la bonne réponse !'
-    : '😊 Pas tout à fait. La bonne réponse est : Bonjour.';
-  document.getElementById('next').style.display='inline-block';
-}
-function nextQuestion() {
-  document.querySelector('#evalue .activity h3').textContent =
-    'Question 2 : Quel est le verbe être avec "je" ?';
-  const buttons=document.querySelectorAll('#evalue .activity button');
-  buttons[0].textContent='Je suis';
-  buttons[0].onclick=()=>checkAnswer(buttons[0],true);
-  buttons[1].textContent='Je es';
-  buttons[1].onclick=()=>checkAnswer(buttons[1],false);
-  buttons[2].textContent='Je est';
-  buttons[2].onclick=()=>checkAnswer(buttons[2],false);
-  buttons[0].style.display='inline-block';
-  buttons[1].style.display='inline-block';
-  buttons[2].style.display='inline-block';
-  document.getElementById('result').textContent='';
-  document.getElementById('next').style.display='none';
-  answered=false;
-}
-
-function askAssistant() {
-  const q=document.getElementById('question').value.toLowerCase();
-  const answer=document.getElementById('answer');
-  if(!q.trim()) {
-    answer.textContent='Écris d’abord une question ! 😊';
+function checkSingle(group,answer,feedbackId) {
+  const selected=document.querySelector('input[name="'+group+'"]:checked');
+  const feedback=document.getElementById(feedbackId);
+  if(!selected) {
+    feedback.innerHTML='<div class="feedback incorrect">Choisis une réponse avant de vérifier.</div>';
     return;
   }
-  if(q.includes('être')) {
-    answer.textContent='💡 Le verbe ÊTRE permet de présenter une personne ou de décrire son état. Exemple : Je suis élève. À toi de créer une phrase !';
-  } else if(q.includes('avoir')) {
-    answer.textContent='💡 Le verbe AVOIR exprime notamment la possession. Exemple : J’ai un livre. Peux-tu créer une autre phrase ?';
-  } else if(q.includes('bonjour')) {
-    answer.textContent='💡 Bonjour est une formule de salutation utilisée pendant la journée. Essaie aussi de découvrir "Bonsoir" !';
-  } else if(q.includes('passé composé')) {
-    answer.textContent='💡 Le passé composé sert à parler d’une action passée. Il se construit généralement avec AVOIR ou ÊTRE + participe passé. Exemple : J’ai mangé.';
-  } else if(q.includes('merci')) {
-    answer.textContent='💡 On dit "Merci" pour remercier quelqu’un. Pour répondre, tu peux dire "De rien" !';
-  } else {
-    answer.textContent='🌸 Bonne question ! Pour le moment, je suis un assistant de démonstration. Essaie de demander une explication sur être, avoir, bonjour ou le passé composé.';
-  }
+  const ok=selected.value===answer;
+  feedback.innerHTML='<div class="feedback '+(ok?'correct':'incorrect')+'">'+
+    (ok?'Bravo ! Bonne réponse ! 🎉':'Ce n’est pas la bonne réponse. Réessaie !')+'</div>';
 }
+function checkQuiz(prefix,answers,total) {
+  let score=0;
+  let complete=true;
+  for(let i=1;i<=total;i++) {
+    const selected=document.querySelector('input[name="'+prefix+i+'"]:checked');
+    if(!selected)complete=false;
+    else if(selected.value===answers[i-1])score++;
+  }
+  const box=document.getElementById('score-'+prefix);
+  box.style.display='block';
+  if(!complete) {
+    box.innerHTML='Réponds à toutes les questions avant de terminer.';
+    return;
+  }
+  box.innerHTML='<div class="score-number">'+score+'/'+total+'</div><b>'+Math.round(score/total*100)+'%</b><p>'+ (score===total?'Excellent travail ! 🌟':'Continue à t’entraîner !')+'</p>';
+  recordScore('Compréhension écrite',score,total);
+}
+function submitMainQuiz() {
+  const answers=['a','b','a','c','a'];
+  let score=0,complete=true;
+  for(let i=1;i<=5;i++) {
+    const selected=document.querySelector('input[name="q'+i+'"]:checked');
+    if(!selected)complete=false;
+    else if(selected.value===answers[i-1])score++;
+  }
+  const box=document.getElementById('main-score');
+  box.style.display='block';
+  if(!complete) {
+    box.innerHTML='Réponds à toutes les questions avant de terminer.';
+    return;
+  }
+  box.innerHTML='<div class="score-number">'+score+'/5</div><b>Ton résultat : '+score*20+'%</b><p>'+(score===5?'Félicitations ! Tu maîtrises les bases ! 🎉':'Relis les cours et essaie encore !')+'</p>';
+  recordScore('Quiz de grammaire A1',score,5);
+}
+function resetMainQuiz() {
+  document.querySelectorAll('#main-quiz input').forEach(i=>i.checked=false);
+  document.getElementById('main-score').style.display='none';
+}
+function checkFill() {
+  const answers=['ai','ai','parlons'];
+  let score=0;
+  answers.forEach((a,i)=>{
+    const value=document.getElementById('game'+(i+1)).value.trim().toLowerCase();
+    if(value===a)score++;
+  });
+  document.getElementById('fill-feedback').innerHTML=
+    '<div class="feedback '+(score===3?'correct':'incorrect')+'">Tu as '+score+' bonne(s) réponse(s) sur 3. '+(score===3?'Bravo !':'Relis les corrections et réessaie.')+'</div>';
+}
+
+/* DEVOIRS */
+function markHomework(checkbox,index) {
+  let data=getData();
+  if(!data.homework)data.homework=[false,false,false];
+  data.homework[index]=checkbox.checked;
+  saveData(data);
+  updateDashboard();
+}
+function updateHomework() {
+  let data=getData();
+  let done=data.homework||[false,false,false];
+  document.querySelectorAll('#homework-list input[type=checkbox]').forEach((box,i)=>{
+    box.checked=!!done[i];
+  });
+  const count=done.filter(Boolean).length;
+  document.getElementById('homework-progress').style.width=(count/3*100)+'%';
+  document.getElementById('homework-count').textContent=count+' devoir(s) terminé(s) sur 3.';
+}
+
+/* ESPACE PERSONNEL */
+function saveName() {
+  let data=getData();
+  data.name=document.getElementById('student-name').value;
+  saveData(data);
+  updateDashboard();
+}
+function updateDashboard() {
+  const data=getData();
+  const history=data.history||[];
+  const homework=data.homework||[false,false,false];
+  const scores=history.map(h=>h.score/h.total*100);
+  const best=scores.length?Math.max(...scores):0;
+  const points=history.reduce((sum,h)=>sum+h.score*10,0);
+  const done=homework.filter(Boolean).length;
+  document.getElementById('stat-quizzes').textContent=history.length;
+  document.getElementById('stat-score').textContent=Math.round(best)+'%';
+  document.getElementById('stat-homework').textContent=done+'/3';
+  document.getElementById('stat-points').textContent=points;
+  document.getElementById('student-name').value=data.name||'';
+  document.getElementById('welcome-name').textContent=data.name?'Bonjour '+data.name+' ! Continue tes efforts !':'Ton parcours commence ici.';
+  const historyBox=document.getElementById('history');
+  historyBox.innerHTML=history.length?
+    history.slice().reverse().map(h=>'<div class="task"><b>'+h.name+'</b><p>'+h.score+'/'+h.total+' bonnes réponses · '+h.date+'</p></div>').join(''):
+    '<p class="empty">Tu n’as pas encore terminé de quiz.</p>';
+  const progress=Math.min(100,Math.round((history.length+done)/8*100));
+  document.getElementById('learning-progress').style.width=progress+'%';
+  document.getElementById('progress-text').textContent=progress+'% de ton objectif de démonstration est atteint.';
+  updateHomework();
+}
+
+/* ASSISTANT PEDAGOGIQUE DE DEMONSTRATION */
+function addMessage(text,type) {
+  const messages=document.getElementById('chat-messages');
+  const div=document.createElement('div');
+  div.className='message '+type;
+  div.textContent=text;
+  messages.appendChild(div);
+  messages.scrollTop=messages.scrollHeight;
+}
+function quickAsk(text) {
+  document.getElementById('chat-input').value=text;
+  sendMessage();
+}
+function assistantReply(question) {
+  const q=question.toLowerCase();
+  if(q.includes('être'))return 'Le verbe ÊTRE au présent : je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont. Exemple : Je suis élève.';
+  if(q.includes('avoir'))return 'Le verbe AVOIR au présent : j’ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont. Exemple : J’ai seize ans.';
+  if(q.includes('un et une')||q.includes('un ou une'))return 'UN est utilisé avec un nom masculin : un livre, un garçon. UNE est utilisé avec un nom féminin : une table, une fille.';
+  if(q.includes('-er')||q.includes('er '))return 'Pour conjuguer un verbe régulier en -ER, enlève -ER et ajoute : -e, -es, -e, -ons, -ez, -ent. Exemple : je parle, tu parles, nous parlons.';
+  if(q.includes('passé composé')||q.includes('passe compose'))return 'Le passé composé se forme avec AVOIR ou ÊTRE au présent + participe passé. Exemple : J’ai mangé. Elle est allée.';
+  if(q.includes('négation')||q.includes('negation'))return 'Pour faire une phrase négative, utilise NE ... PAS autour du verbe. Exemple : Je parle → Je ne parle pas.';
+  if(q.includes('bonjour')||q.includes('présent'))return 'Pour te présenter, tu peux dire : Bonjour, je m’appelle ..., j’ai ... ans, j’habite à ..., je suis ... et j’aime ...';
+  if(q.includes('exercice'))return 'Voici un petit exercice : complète la phrase « Nous _____ français ». Choisis la bonne forme du verbe PARLER. Indice : cherche le sujet NOUS dans le tableau de conjugaison.';
+  if(q.includes('famille'))return 'Quelques mots : le père, la mère, le frère, la sœur, les parents, le grand-père, la grand-mère. Exemple : J’ai une sœur.';
+  if(q.includes('merci'))return 'Avec plaisir ! Continue à pratiquer le français. À bientôt ! 😊';
+  return 'Bonne question ! Pour progresser, commence par identifier le sujet et le verbe. Consulte la rubrique J’APPRENDS pour retrouver les cours. Tu peux aussi me demander un exemple ou un exercice sur un thème précis.';
+}
+function sendMessage() {
+  const input=document.getElementById('chat-input');
+  const question=input.value.trim();
+  if(!question)return;
+  addMessage(question,'user');
+  input.value='';
+  setTimeout(()=>addMessage(assistantReply(question),'bot'),250);
+}
+
+updateDashboard();
 </script>
 </body>
 </html>
-
